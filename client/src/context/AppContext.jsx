@@ -1,8 +1,10 @@
 /* eslint-disable react-refresh/only-export-components */
+/* eslint-disable react-hooks/set-state-in-effect */
+
 
 import { createContext, useContext, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { dummyUserData } from "../assets/assets";
+import { dummyChats, dummyUserData } from "../assets/assets";
 
 const AppContext = createContext(null);
 
@@ -20,8 +22,33 @@ export const AppContextProvider = ({ children }) => {
     setUser(dummyUserData);
   };
 
+  const fetchUsersChats = async () => {
+    setChats(dummyChats);
+    setSelectedChat(dummyChats[0]);
+  };
+
+  // Theme effect
   useEffect(() => {
-    // fetchUser();
+    if (theme === "dark") {
+      document.documentElement.classList.add("dark");
+    } else {
+      document.documentElement.classList.remove("dark");
+    }
+  }, [theme]);
+
+  // Fetch chats when user changes
+  useEffect(() => {
+    if (user) {
+      fetchUsersChats();
+    } else {
+      setChats([]);
+      setSelectedChat(null);
+    }
+  }, [user]);
+
+  // Initial load
+  useEffect(() => {
+    fetchUser();
   }, []);
 
   const value = {
@@ -34,6 +61,7 @@ export const AppContextProvider = ({ children }) => {
     theme,
     setTheme,
     fetchUser,
+    fetchUsersChats,
     navigate,
   };
 
