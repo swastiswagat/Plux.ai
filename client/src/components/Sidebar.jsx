@@ -23,6 +23,10 @@ const Sidebar = () => {
         <img src={assets.search_icon} alt="Search" className='w-4 not-dark:invert' />
         <input type="text" placeholder='Search conversations...' className='text-xs placeholder:text-gray-400 outline-none' value={search} onChange={(e) => setSearch(e.target.value)} />
       </div>
+      
+      {/* Recent Chats */}
+
+      HEllo
 
     </div>
   )
