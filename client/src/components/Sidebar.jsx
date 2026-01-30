@@ -26,7 +26,6 @@ const Sidebar = () => {
       
       {/* Recent Chats */}
 
-      HEllo
 
     </div>
   )
